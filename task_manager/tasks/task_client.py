@@ -4,14 +4,19 @@ import requests
 def run_task_client():
     base_url = "http://localhost:8000/tasks/"
 
-    # Create new task
-    task_data = {"title": "Example Task", "description": "This is an example task.", "completed": False}
-    response = requests.post(f"{base_url}create/", json=task_data)
-    print("Create Task:", response.json())
+    # # Create new task
+    # task_data = {"title": "Example Task", "description": "This is an example task.", "completed": False}
+    # response = requests.post(f"{base_url}create/", json=task_data)
+    # print("Create Task:", response.json())
 
-    # # Get all tasks
-    # response = requests.get(base_url)
-    # print("All Tasks:", response.json())
+    # Get all tasks
+    response = requests.get(base_url)
+    print("All Tasks:", response.json())
+
+    # Get tasks by filter
+    search_term = "example"  # Enter the words you want to search from all the tasks in the description column
+    response_filtered = requests.get(f"{base_url}?search={search_term}")
+    print(f"Filtered Tasks (searching for '{search_term}'):", response_filtered.json())
 
     task_id = 4
 

@@ -11,7 +11,14 @@ class AllTasks(APIView):
         Returns all existing tasks from the database.
         """
         try:
-            tasks = Task.objects.all()  # Query all tasks from the database
+            search_term = request.query_params.get('search', None)
+
+            if search_term:
+                # icontains is actually a case-insensitive search
+                tasks = Task.objects.filter(description__icontains=search_term)
+            else:
+                tasks = Task.objects.all()
+
             serializer = TaskSerializer(tasks, many=True)  # Serialize the task data
             return Response(serializer.data)  # Return the serialized data
         except Exception as e:
