@@ -1,17 +1,14 @@
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.views import APIView
 from .models import Task
+from rest_framework import status
 from .serializers import TaskSerializer
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 
 class AllTasks(APIView):
     def get(self, request):
         """
-        Handle GET requests to retrieve all tasks.
-
-        This function queries the database for all Task objects, serializes them,
-        and returns the serialized data in the response.
+        Returns all existing tasks from the database.
         """
         try:
             tasks = Task.objects.all()  # Query all tasks from the database
@@ -22,8 +19,10 @@ class AllTasks(APIView):
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-class TaskListCreate(APIView):
-
+class CreateTask(APIView):
+    """
+    Handles creating a new task with provided data.
+    """
     def post(self, request):
         serializer = TaskSerializer(data=request.data)
         if serializer.is_valid():
@@ -36,7 +35,9 @@ class TaskListCreate(APIView):
 
 
 class TaskDetail(APIView):
+
     def get(self, request, pk):
+        """Retrieve a task by its primary key (pk)."""
         try:
             task = Task.objects.get(pk=pk)
             serializer = TaskSerializer(task)
@@ -47,6 +48,7 @@ class TaskDetail(APIView):
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def put(self, request, pk):
+        """Update a task's details by its primary key (pk)."""
         try:
             task = Task.objects.get(pk=pk)
             serializer = TaskSerializer(task, data=request.data)
@@ -60,6 +62,7 @@ class TaskDetail(APIView):
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def delete(self, request, pk):
+        """Delete a task by its primary key (pk)."""
         try:
             task = Task.objects.get(pk=pk)
             task.delete()
