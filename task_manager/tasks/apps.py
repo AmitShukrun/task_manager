@@ -6,7 +6,8 @@ class TaskConfig(AppConfig):
     name = 'tasks'
 
     def ready(self):
-        # Used to run the task_client.py script when the application up
+        # This setup runs task_client.py only for this homework assignment.
+        # In a production environment, I would never include this; it's just a substitute for Postman.
         try:
             subprocess.Popen(["python", "tasks/task_client.py"])
         except Exception as e:
