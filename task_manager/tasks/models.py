@@ -6,6 +6,8 @@ class Task(models.Model):
     description = models.TextField()
     completed = models.BooleanField(default=False)
 
+    class Meta:
+        db_table = 'task'
+
     def __str__(self):
         return self.title
-    
