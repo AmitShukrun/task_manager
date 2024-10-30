@@ -1,7 +1,7 @@
-from django.urls import path
-from tasks import views
+from django.contrib import admin
+from django.urls import path, include
 
 urlpatterns = [
-    path('tasks/', views.TaskListCreate.as_view(), name='task-list'),
-    path('tasks/<int:pk>/', views.TaskDetail.as_view(), name='task-detail'),
+    path('admin/', admin.site.urls),
+    path('tasks/', include('tasks.urls')),  # Include the URLs from the tasks app
 ]
