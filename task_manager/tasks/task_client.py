@@ -9,21 +9,26 @@ def run_task_client():
     # response = requests.post(f"{base_url}create/", json=task_data)
     # print("Create Task:", response.json())
 
-    # Get all tasks
-    response = requests.get(base_url)
-    print("All Tasks:", response.json())
+    # # Get all tasks
+    # response = requests.get(base_url)
+    # print("All Tasks:", response.json())
+    #
+    # # Get tasks by filter
+    # search_term = "example"  # Enter the words you want to search from all the tasks in the description column
+    # response_filtered = requests.get(f"{base_url}?search={search_term}")
+    # print(f"Filtered Tasks (searching for '{search_term}') in description column:\n", response_filtered.json())
+    #
+    # # Get tasks by category filter
+    # search_category = "urgent"
+    # response_filtered = requests.get(f"{base_url}?category={search_category}")
+    # print(f"Filtered Tasks (searching for '{search_category}') in category column:\n", response_filtered.json())
 
-    # Get tasks by filter
-    search_term = "example"  # Enter the words you want to search from all the tasks in the description column
-    response_filtered = requests.get(f"{base_url}?search={search_term}")
-    print(f"Filtered Tasks (searching for '{search_term}') in description column:\n", response_filtered.json())
+    # Get completed tasks filter
+    completed = True
+    response_filtered = requests.get(f"{base_url}?completed={completed}")
+    print(f"Filtered Tasks searching for completed tasks:\n", response_filtered.json())
 
-    # Get tasks by category filter
-    search_category = "urgent"
-    response_filtered = requests.get(f"{base_url}?category={search_category}")
-    print(f"Filtered Tasks (searching for '{search_category}') in category column:\n", response_filtered.json())
-
-    task_id = 4
+    task_id = 1
 
     # # Update task
     # updated_task_data = {"title": "Updated Task", "description": "Updated description.", "completed": True}

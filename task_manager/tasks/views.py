@@ -13,6 +13,7 @@ class AllTasks(APIView):
         try:
             search_term = request.query_params.get('search', None)
             category = request.query_params.get('category', None)
+            completed = request.query_params.get('completed', None)
 
             if search_term:
                 # icontains is actually a case-insensitive search
@@ -23,10 +24,13 @@ class AllTasks(APIView):
             if category:
                 tasks = tasks.filter(categories__icontains=category)
 
+            if completed:
+                completed = completed.lower() == 'true'
+                tasks = tasks.filter(completed=completed)
+
             serializer = TaskSerializer(tasks, many=True)  # Serialize the task data
             return Response(serializer.data)  # Return the serialized data
         except Exception as e:
-            # Return a 500 error if any exception occurs
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
@@ -48,7 +52,9 @@ class CreateTask(APIView):
 class TaskDetail(APIView):
 
     def get(self, request, pk):
-        """Retrieve a task by its primary key (pk)."""
+        """
+        Retrieve a task by its primary key (pk).
+        """
         try:
             task = Task.objects.get(pk=pk)
             serializer = TaskSerializer(task)
