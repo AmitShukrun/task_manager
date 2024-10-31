@@ -20,23 +20,23 @@ To set up and run the project, use the following command:
 
 
 ### Get the all tasks
-![](images/‏‏1.PNG)
+![](task_manager/images/‏‏1.PNG)
 
 ### Filtered tasks by some term - like  "example"
-![](images/‏‏2.PNG)
+![](task_manager/images/‏‏2.PNG)
 
 ### Update task
-![](images/‏‏3.PNG)
+![](task_manager/images/‏‏3.PNG)
 
 ### Filtered tasks by category
-![](images/‏‏4.PNG)
+![](task_manager/images/‏‏4.PNG)
 
 ### Filtered completed tasks
-![](images/‏‏5.PNG)
+![](task_manager/images/‏‏5.PNG)
 
 ### Get task by id
-![](images/‏‏6.PNG)
+![](task_manager/images/‏‏6.PNG)
 
 ### Delete Task
-![](images/‏‏7.PNG)
+![](task_manager/images/‏‏7.PNG)
 
