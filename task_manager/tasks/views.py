@@ -12,12 +12,16 @@ class AllTasks(APIView):
         """
         try:
             search_term = request.query_params.get('search', None)
+            category = request.query_params.get('category', None)
 
             if search_term:
                 # icontains is actually a case-insensitive search
                 tasks = Task.objects.filter(description__icontains=search_term)
             else:
                 tasks = Task.objects.all()
+
+            if category:
+                tasks = tasks.filter(categories__icontains=category)
 
             serializer = TaskSerializer(tasks, many=True)  # Serialize the task data
             return Response(serializer.data)  # Return the serialized data

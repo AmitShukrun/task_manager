@@ -16,7 +16,12 @@ def run_task_client():
     # Get tasks by filter
     search_term = "example"  # Enter the words you want to search from all the tasks in the description column
     response_filtered = requests.get(f"{base_url}?search={search_term}")
-    print(f"Filtered Tasks (searching for '{search_term}'):", response_filtered.json())
+    print(f"Filtered Tasks (searching for '{search_term}') in description column:\n", response_filtered.json())
+
+    # Get tasks by category filter
+    search_category = "urgent"
+    response_filtered = requests.get(f"{base_url}?category={search_category}")
+    print(f"Filtered Tasks (searching for '{search_category}') in category column:\n", response_filtered.json())
 
     task_id = 4
 
