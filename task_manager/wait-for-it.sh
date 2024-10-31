@@ -1,6 +1,6 @@
 #!/bin/bash
 
-URL="http://web:8000/"  # Change this to your server's URL
+URL="http://web:8000/"
 RETRY_INTERVAL=5  # Time in seconds between each check
 
 echo "Checking server availability at $URL..."
