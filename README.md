@@ -10,6 +10,7 @@ The application consists of three main components:
 
 ### Getting Started
 To set up and run the project, use the following command:
+
     ```
     docker-compose up
     ```
