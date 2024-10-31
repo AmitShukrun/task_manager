@@ -15,7 +15,9 @@ To set up and run the project, use the following command:
     docker-compose up
     ```
 
-### Results
+<br>
+
+## Results
 
 
 ### Get the all tasks
