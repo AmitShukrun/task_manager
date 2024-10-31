@@ -8,6 +8,8 @@ The application consists of three main components:
 2. **API** - Provides endpoints for interacting with the task data.
 3. **Script Interface** - Simulates a basic user interface for managing tasks.
 
+<br>
+
 ### Getting Started
 To set up and run the project, use the following command:
 
