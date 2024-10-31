@@ -3,8 +3,8 @@ import requests
 
 def run_task_client():
     # base_url = "http://localhost:8000/tasks/"
-    base_url = "http://127.0.0.1:8000/tasks/"
-    # base_url = "http://web:8000/tasks/"
+    # base_url = "http://127.0.0.1:8000/tasks/"
+    base_url = "http://web:8000/tasks/"
 
     # Create new task
     task_data = {"title": "Example Task", "description": "Example task.", "completed": False}

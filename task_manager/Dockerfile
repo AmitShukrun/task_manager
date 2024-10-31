@@ -1,20 +1,20 @@
+# קובעים את התמונה הבסיסית
 FROM python:3.9
 
-# Ensure unbuffered output (useful for logging)
+# קובעים משתנים לספריית העבודה
+ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# Set the working directory
+# יוצרים את ספריית העבודה
 WORKDIR /app
 
-# Copy the requirements file and install dependencies
+# מעתיקים את קבצי הפרויקט
 COPY requirements.txt /app/
+
+# מתקינים את התלויות
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application code
 COPY . /app/
 
-# Expose the port the app runs on
-EXPOSE 8000
-
-# Use gunicorn instead of Django's built-in server
-CMD ["gunicorn", "myproject.wsgi:application", "--bind", "0.0.0.0:8000"]
+# פקודת התחלה
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "your_project_name.wsgi:application"]

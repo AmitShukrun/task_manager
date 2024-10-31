@@ -35,10 +35,10 @@ class AllTasks(APIView):
 
 
 class CreateTask(APIView):
-    """
-    Handles creating a new task with provided data.
-    """
     def post(self, request):
+        """
+        Handles creating a new task with provided data.
+        """
         serializer = TaskSerializer(data=request.data)
         if serializer.is_valid():
             try:
@@ -65,7 +65,9 @@ class TaskDetail(APIView):
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def put(self, request, pk):
-        """Update a task's details by its primary key (pk)."""
+        """
+        Update a task's details by its primary key (pk).
+        """
         try:
             task = Task.objects.get(pk=pk)
             serializer = TaskSerializer(task, data=request.data)
@@ -79,7 +81,9 @@ class TaskDetail(APIView):
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def delete(self, request, pk):
-        """Delete a task by its primary key (pk)."""
+        """
+        Delete a task by its primary key (pk).
+        """
         try:
             task = Task.objects.get(pk=pk)
             task.delete()

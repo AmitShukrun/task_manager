@@ -2,28 +2,44 @@ version: '3.8'
 
 services:
   db:
-    image: postgres:latest
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: tasks_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin
     ports:
       - "5432:5432"
+    networks:
+      - task_network
 
   web:
     build: .
     command: >
-      sh -c "until nc -z db 5432; do echo waiting for db; sleep 2; done; python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+      sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/app
     ports:
       - "8000:8000"
     depends_on:
       - db
+    networks:
+      - task_network
 
   task_client:
     build: .
-    command: ["python", "tasks/task_client.py"]
+    command: sh -c "chmod +x wait-for-it.sh && ./wait-for-it.sh && python tasks/task_client.py"  # Wait for the web service
+    volumes:
+      - .:/app
     depends_on:
       - web
-    restart: on-failure
+    networks:
+      - task_network
+
+networks:
+  task_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
